@@ -24,6 +24,9 @@ jobs:
           name: Dump Google Cloud Credentials to file
           command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json 
       - run:
+          name: Install kubectl
+          command: gcloud components install kubectl 
+      - run:
           name: Authenticate with SA
           command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
       - run: 

@@ -22,7 +22,7 @@ jobs:
           command: echo 'export PATH=/bin/google-cloud-sdk/bin:$PATH' >> $BASH_ENV
       - run:
           name: Install kubectl
-          command: sudo gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+          command: sudo gcloud --quiet components update kubectl
       - run: 
           name: Dump Google Cloud Credentials to file
           command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json 
@@ -34,7 +34,7 @@ jobs:
           command: |
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-            gcloud --quiet components update kubectl
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
       - run: 
           name: Build & push image to GCR
           command: |

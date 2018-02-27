@@ -18,6 +18,9 @@ jobs:
           name: Download & install Google SDK
           command: curl https://dl.google.com/dl/cloudsdk/channels/rapid/install_google_cloud_sdk.bash -o gcloud_install.sh && sudo sh gcloud_install.sh --disable-prompts --install-dir="/bin"
       - run: 
+          name: Installing kubectl using Google SDK
+          command: sudo /bin/google-cloud-sdk/bin/gcloud --quiet components install kubectl
+      - run: 
           name: Update PATH
           command: echo 'export PATH=/bin/google-cloud-sdk/bin:$PATH' >> $BASH_ENV
       - run: 
@@ -27,9 +30,8 @@ jobs:
           name: Authenticate with SA
           command: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
       - run: 
-          name: Installing kubectl and Activating gcloud configuration
+          name: Activating gcloud configuration
           command: |
-            sudo /bin/google-cloud-sdk/bin/gcloud --quiet components install kubectl
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
             gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
@@ -41,4 +43,4 @@ jobs:
             gcloud docker -- push eu.gcr.io/${PROJECT_NAME}/hello-ci:$CIRCLE_SHA1
       - run:
           name: Deploy new version of app
-          command: kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/${PROJECT_NAME}/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'
+          command: kubectl patch deployment react-redux" -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/${PROJECT_NAME}/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'

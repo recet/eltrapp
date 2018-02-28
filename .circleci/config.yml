@@ -43,4 +43,4 @@ jobs:
             gcloud docker -- push eu.gcr.io/${PROJECT_NAME}/hello-ci:$CIRCLE_SHA1
       - run:
           name: Deploy new version of app
-          command: kubectl patch deployment react-redux -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/${PROJECT_NAME}/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'
+          command: kubectl patch deployment react-redux -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/recet-demo/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'

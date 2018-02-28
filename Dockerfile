@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:7
 
 # make this cache-able
 COPY . /home/

@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: react-redux
-        image: eu.gcr.io/recet-demo/hello-ci:a4578ad40d8aea634c0cdc1d1162b07d77c32579
+        image: eu.gcr.io/recet-demo/hello-ci:61dd9608b36be945311fb2d5aea983c5adb85b90
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 3000
         resources:
           requests:
             memory: "200Mi"

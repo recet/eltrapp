@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM circleci/node:7
 
 # make this cache-able
 COPY . /home/

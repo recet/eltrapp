@@ -38,9 +38,9 @@ jobs:
       - run: 
           name: Build & push image to GCR
           command: |
-            echo 'FROM alpine:latest' > ${HOME}/tmp/Dockerfile
+            #echo 'FROM alpine:latest' > ${HOME}/tmp/Dockerfile
             docker build -t eu.gcr.io/${PROJECT_NAME}/hello-ci:$CIRCLE_SHA1 .
             gcloud docker -- push eu.gcr.io/${PROJECT_NAME}/hello-ci:$CIRCLE_SHA1
       - run:
           name: Deploy new version of app
-          command: kubectl patch deployment react-redux" -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/${PROJECT_NAME}/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'
+          command: kubectl patch deployment react-redux -p '{"spec":{"template":{"spec":{"containers":[{"name":"react-redux","image":"eu.gcr.io/${PROJECT_NAME}/hello-ci:'"$CIRCLE_SHA1"'"}]}}}}'

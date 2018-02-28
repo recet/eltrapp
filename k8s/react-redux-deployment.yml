@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: react-redux
+  #namespace: documentation
+  labels:
+    app: react-redux
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: react-redux
+  template:
+    metadata:
+      labels:
+        name: react-redux
+    spec:
+      containers:
+      - name: react-redux
+        image: eu.gcr.io/recet-demo/hello-ci:test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "50m"
+          limits:
+            memory: "400Mi"
+            cpu: "200m"
+        command: ["sh", "-c", "sleep 100000000"]
+ #       readinessProbe:
+ #         tcpSocket:
+ #           port: 80
+ #         initialDelaySeconds: 15
+ #         timeoutSeconds: 5

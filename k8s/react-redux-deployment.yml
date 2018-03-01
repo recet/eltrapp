@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: react-redux
-        image: eu.gcr.io/recet-demo/hello-ci:61dd9608b36be945311fb2d5aea983c5adb85b90
+        image: eu.gcr.io/recet-demo/hello-ci:82e38c47138751d865b56774af8c2e74ba8fe166
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

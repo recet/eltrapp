@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: react-redux
+  name: react-redux
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 32338
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    name: react-redux
+  type: LoadBalancer

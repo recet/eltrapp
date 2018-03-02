@@ -4,6 +4,6 @@ EXPOSE 3000
 
 WORKDIR /etc/react/
 
-COPY . /home/
+COPY . .
 
 CMD npm start
